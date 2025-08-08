@@ -1,0 +1,5 @@
+City,Category,Dataset Name,Description,Thumbnail URL,Source URL,Data Type
+Austin,Zoning,Base Zoning,Official Austin zoning polygons for land use planning.,https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Austin_skyline.jpg/320px-Austin_skyline.jpg,https://data.austintexas.gov/Locations-and-Maps/Zoning/5rzy-b4ne,Polygon
+Austin,Transportation,Sidewalk Inventory,Locations and conditions of sidewalks in Austin.,https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Austin_sidewalk.jpg/320px-Austin_sidewalk.jpg,https://data.austintexas.gov/Transportation-and-Mobility/Sidewalk-Inventory/abcd-1234,Line
+Nashville,Parcels,Property Parcels,Parcel boundaries and property information for Nashville.,https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Nashville_skyline_2020.jpg/320px-Nashville_skyline_2020.jpg,https://data.nashville.gov/Property/Parcels/abc1-def2,Polygon
+Nashville,Environmental,Floodplain,FEMA floodplain boundaries for Nashville.,https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Cumberland_River_Nashville.jpg/320px-Cumberland_River_Nashville.jpg,https://data.nashville.gov/Environment/Floodplain/xyz1-9876,Polygon

@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>GIS Data Catalog</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <style>
+        table img {
+            width: 120px;
+            border-radius: 6px;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<h1>GIS Data Catalog – Austin & Nashville</h1>
+<p>Search, sort, and filter through the available GIS datasets. Click "View" to open the dataset source page.</p>
+<table id="gisTable" class="display">
+    <thead>
+        <tr>
+            <th>City</th>
+            <th>Category</th>
+            <th>Dataset</th>
+            <th>Description</th>
+            <th>Thumbnail</th>
+            <th>Source</th>
+            <th>Data Type</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+<script>
+Papa.parse("gis_catalog_sample.csv", {
+    download: true,
+    header: true,
+    complete: function(results) {
+        var data = results.data;
+        var tbody = "";
+        data.forEach(function(row) {
+            if(row.City) { // avoid empty rows
+                tbody += "<tr>" +
+                    "<td>" + row.City + "</td>" +
+                    "<td>" + row.Category + "</td>" +
+                    "<td>" + row["Dataset Name"] + "</td>" +
+                    "<td>" + row.Description + "</td>" +
+                    "<td><img src='" + row["Thumbnail URL"] + "'></td>" +
+                    "<td><a href='" + row["Source URL"] + "' target='_blank'>View</a></td>" +
+                    "<td>" + row["Data Type"] + "</td>" +
+                    "</tr>";
+            }
+        });
+        document.querySelector("#gisTable tbody").innerHTML = tbody;
+        $("#gisTable").DataTable();
+    }
+});
+</script>
+</body>
+</html>
