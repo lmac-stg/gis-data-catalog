@@ -37,6 +37,27 @@
             font-size: 14px;
             text-align: center;
         }
+        .category-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-align: center;
+            min-width: 80px;
+        }
+        .category-ZONING { background-color: #8e44ad; }
+        .category-REGIONAL { background-color: #3498db; }
+        .category-INFRASTRUCTURE { background-color: #e67e22; }
+        .category-TRANSPORTATION { background-color: #2ecc71; }
+        .category-PARCELS { background-color: #e74c3c; }
+        .category-TERRAIN { background-color: #95a5a6; }
+        .category-ENVIRONMENTAL { background-color: #27ae60; }
+        .category-FACILITIES { background-color: #f39c12; }
+        .category-HISTORIC { background-color: #9b59b6; }
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
@@ -60,12 +81,11 @@
     <thead>
         <tr>
             <th>City</th>
+            <th>Layer</th>
             <th>Category</th>
-            <th>Dataset</th>
-            <th>Description</th>
+            <th>Type</th>
             <th>Preview Image</th>
-            <th>Source</th>
-            <th>Data Type</th>
+            <th>Notes</th>
         </tr>
     </thead>
     <tbody>
@@ -76,29 +96,31 @@
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 <script>
-Papa.parse("gis_catalog_sample.csv", {
+Papa.parse("GIS_Layer_Catalog.csv", {
     download: true,
     header: true,
     complete: function(results) {
         var data = results.data;
         var tbody = "";
         data.forEach(function(row) {
-            if(row.City) { // avoid empty rows
+            if(row.CITY) { // avoid empty rows
                 var thumbnailContent = "";
-                if(row["Thumbnail URL"] && row["Thumbnail URL"].trim() !== "") {
-                    thumbnailContent = "<img src='" + row["Thumbnail URL"] + "' alt='" + row["Dataset Name"] + " thumbnail' onerror=\"this.parentNode.innerHTML='<div class=\\\"image-placeholder\\\">No Image Available</div>'\">";
+                if(row.IMAGE && row.IMAGE.trim() !== "") {
+                    thumbnailContent = "<img src='" + row.IMAGE + "' alt='" + row.LAYER + " thumbnail' onerror=\"this.parentNode.innerHTML='<div class=\\\"image-placeholder\\\">No Image Available</div>'\">";
                 } else {
                     thumbnailContent = "<div class='image-placeholder'>No Image Available</div>";
                 }
                 
+                // Create colored category badge
+                var categoryBadge = "<span class='category-badge category-" + row.CATEGORY + "'>" + row.CATEGORY + "</span>";
+                
                 tbody += "<tr>" +
-                    "<td>" + row.City + "</td>" +
-                    "<td>" + row.Category + "</td>" +
-                    "<td>" + row["Dataset Name"] + "</td>" +
-                    "<td>" + row.Description + "</td>" +
+                    "<td>" + row.CITY + "</td>" +
+                    "<td>" + row.LAYER + "</td>" +
+                    "<td>" + categoryBadge + "</td>" +
+                    "<td>" + row.TYPE + "</td>" +
                     "<td class='thumbnail-cell'>" + thumbnailContent + "</td>" +
-                    "<td><a href='" + row["Source URL"] + "' target='_blank'>View</a></td>" +
-                    "<td>" + row["Data Type"] + "</td>" +
+                    "<td>" + (row.NOTE || "") + "</td>" +
                     "</tr>";
             }
         });
