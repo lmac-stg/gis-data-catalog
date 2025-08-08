@@ -7,8 +7,35 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <style>
         table img {
-            width: 120px;
-            border-radius: 6px;
+            width: 180px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        table img:hover {
+            transform: scale(1.1);
+            border-color: #007bff;
+            box-shadow: 0 4px 12px rgba(0,123,255,0.3);
+        }
+        .thumbnail-cell {
+            text-align: center;
+            padding: 10px;
+        }
+        .image-placeholder {
+            width: 180px;
+            height: 120px;
+            background-color: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            font-size: 14px;
+            text-align: center;
         }
         body {
             font-family: Arial, sans-serif;
@@ -17,6 +44,12 @@
         h1 {
             font-size: 24px;
             margin-bottom: 20px;
+        }
+        #gisTable {
+            width: 100%;
+        }
+        #gisTable td {
+            vertical-align: middle;
         }
     </style>
 </head>
@@ -30,7 +63,7 @@
             <th>Category</th>
             <th>Dataset</th>
             <th>Description</th>
-            <th>Thumbnail</th>
+            <th>Preview Image</th>
             <th>Source</th>
             <th>Data Type</th>
         </tr>
@@ -51,12 +84,19 @@ Papa.parse("gis_catalog_sample.csv", {
         var tbody = "";
         data.forEach(function(row) {
             if(row.City) { // avoid empty rows
+                var thumbnailContent = "";
+                if(row["Thumbnail URL"] && row["Thumbnail URL"].trim() !== "") {
+                    thumbnailContent = "<img src='" + row["Thumbnail URL"] + "' alt='" + row["Dataset Name"] + " thumbnail' onerror=\"this.parentNode.innerHTML='<div class=\\\"image-placeholder\\\">No Image Available</div>'\">";
+                } else {
+                    thumbnailContent = "<div class='image-placeholder'>No Image Available</div>";
+                }
+                
                 tbody += "<tr>" +
                     "<td>" + row.City + "</td>" +
                     "<td>" + row.Category + "</td>" +
                     "<td>" + row["Dataset Name"] + "</td>" +
                     "<td>" + row.Description + "</td>" +
-                    "<td><img src='" + row["Thumbnail URL"] + "'></td>" +
+                    "<td class='thumbnail-cell'>" + thumbnailContent + "</td>" +
                     "<td><a href='" + row["Source URL"] + "' target='_blank'>View</a></td>" +
                     "<td>" + row["Data Type"] + "</td>" +
                     "</tr>";
