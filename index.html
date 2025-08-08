@@ -7,47 +7,57 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <style>
         table img {
-            width: 180px;
-            height: 120px;
+            width: 90px;
+            height: 60px;
             object-fit: cover;
-            border-radius: 8px;
-            border: 2px solid #ddd;
+            border-radius: 6px;
+            border: 1px solid #ddd;
             transition: all 0.3s ease;
             cursor: pointer;
+            display: block;
+            margin: 0 auto;
         }
         table img:hover {
             transform: scale(1.1);
             border-color: #007bff;
-            box-shadow: 0 4px 12px rgba(0,123,255,0.3);
+            box-shadow: 0 2px 6px rgba(0,123,255,0.3);
         }
         .thumbnail-cell {
             text-align: center;
-            padding: 10px;
+            padding: 5px;
+            vertical-align: middle;
         }
         .image-placeholder {
-            width: 180px;
-            height: 120px;
+            width: 90px;
+            height: 60px;
             background-color: #f8f9fa;
-            border: 2px dashed #dee2e6;
-            border-radius: 8px;
+            border: 1px dashed #dee2e6;
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #6c757d;
-            font-size: 14px;
+            font-size: 11px;
             text-align: center;
+            margin: 0 auto;
         }
         .category-badge {
             display: inline-block;
-            padding: 6px 12px;
-            border-radius: 20px;
+            padding: 4px 8px;
+            border-radius: 15px;
             color: white;
             font-weight: bold;
-            font-size: 12px;
+            font-size: 10px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
             text-align: center;
-            min-width: 80px;
+            min-width: 60px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .category-badge:hover {
+            transform: scale(1.05);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
         .category-ZONING { background-color: #8e44ad; }
         .category-REGIONAL { background-color: #3498db; }
@@ -58,6 +68,106 @@
         .category-ENVIRONMENTAL { background-color: #27ae60; }
         .category-FACILITIES { background-color: #f39c12; }
         .category-HISTORIC { background-color: #9b59b6; }
+        
+        /* Image popup modal styles */
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            cursor: pointer;
+        }
+        .modal-content {
+            display: block;
+            margin: auto;
+            max-width: 90%;
+            max-height: 90%;
+            margin-top: 5%;
+            border-radius: 8px;
+        }
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close-modal:hover {
+            color: #ccc;
+        }
+        
+        /* Request data modal styles */
+        .request-modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        .request-modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+        }
+        .request-modal h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        .request-modal label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        .request-modal input, .request-modal textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: Arial, sans-serif;
+            box-sizing: border-box;
+        }
+        .request-modal textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        .request-modal-buttons {
+            text-align: right;
+            margin-top: 20px;
+        }
+        .request-modal button {
+            padding: 10px 20px;
+            margin-left: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .request-modal .cancel-btn {
+            background-color: #6c757d;
+            color: white;
+        }
+        .request-modal .send-btn {
+            background-color: #007bff;
+            color: white;
+        }
+        .request-modal button:hover {
+            opacity: 0.9;
+        }
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
@@ -71,12 +181,21 @@
         }
         #gisTable td {
             vertical-align: middle;
+            padding: 8px;
+        }
+        #gisTable th {
+            padding: 10px 8px;
         }
     </style>
 </head>
 <body>
 <h1>GIS Data Catalog – Austin & Nashville</h1>
-<p>Search, sort, and filter through the available GIS datasets. Click "View" to open the dataset source page.</p>
+<p>Search, sort, and filter through available GIS datasets. Reach out to the Design Tech team when you find a dataset of interest.</p>
+<div id="filterControls" style="margin-bottom: 15px;">
+    <button id="clearFilter" onclick="clearCategoryFilter()" style="padding: 8px 16px; background-color: #6c757d; color: white; border: none; border-radius: 4px; cursor: pointer; display: none;">Clear Category Filter</button>
+    <button id="requestDataBtn" onclick="openRequestModal()" style="padding: 8px 16px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; margin-left: 10px;">Request Data</button>
+    <span id="filterStatus" style="margin-left: 10px; font-style: italic; color: #666;"></span>
+</div>
 <table id="gisTable" class="display">
     <thead>
         <tr>
@@ -92,42 +211,197 @@
     </tbody>
 </table>
 
+<!-- Image popup modal -->
+<div id="imageModal" class="image-modal">
+    <span class="close-modal">&times;</span>
+    <img class="modal-content" id="modalImage">
+</div>
+
+<!-- Request data modal -->
+<div id="requestModal" class="request-modal">
+    <div class="request-modal-content">
+        <span class="close-modal" onclick="closeRequestModal()">&times;</span>
+        <h3>Request GIS Data</h3>
+        <form id="requestForm">
+            <label for="requesterName">Your Name:</label>
+            <input type="text" id="requesterName" name="requesterName" required>
+            
+            <label for="requesterEmail">Your Email:</label>
+            <input type="email" id="requesterEmail" name="requesterEmail" required>
+            
+            <label for="requestedLayers">Requested Layer(s):</label>
+            <input type="text" id="requestedLayers" name="requestedLayers" placeholder="e.g., Zoning, Building Footprints, etc." required>
+            
+            <label for="requestMessage">Message/Purpose:</label>
+            <textarea id="requestMessage" name="requestMessage" placeholder="Please describe what you need this data for and any specific requirements..." required></textarea>
+            
+            <div class="request-modal-buttons">
+                <button type="button" class="cancel-btn" onclick="closeRequestModal()">Cancel</button>
+                <button type="button" class="send-btn" onclick="sendDataRequest()">Send Request</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 <script>
 Papa.parse("GIS_Layer_Catalog.csv", {
     download: true,
-    header: true,
+    header: false, // Changed to false since CSV has no header
     complete: function(results) {
+        console.log("CSV parsing completed:", results);
+        if (results.errors && results.errors.length > 0) {
+            console.error("CSV parsing errors:", results.errors);
+        }
         var data = results.data;
+        console.log("Number of rows:", data.length);
         var tbody = "";
         data.forEach(function(row) {
-            if(row.CITY) { // avoid empty rows
+            // row is now an array: [CITY, LAYER, CATEGORY, TYPE, IMAGE, NOTE, IMAGE_URL]
+            if(row[0] && row[0].trim() !== "") { // Check if city exists
                 var thumbnailContent = "";
-                if(row.IMAGE && row.IMAGE.trim() !== "") {
-                    thumbnailContent = "<img src='" + row.IMAGE + "' alt='" + row.LAYER + " thumbnail' onerror=\"this.parentNode.innerHTML='<div class=\\\"image-placeholder\\\">No Image Available</div>'\">";
+                // Use IMAGE_URL (index 6) if available, otherwise IMAGE (index 4)
+                var imageUrl = (row[6] && row[6].trim() !== "") ? row[6] : 
+                              (row[4] && row[4].trim() !== "") ? "images/" + row[4] : "";
+                
+                if(imageUrl) {
+                    thumbnailContent = "<img src='" + imageUrl + "' alt='" + row[1] + " thumbnail' onclick='openImageModal(\"" + imageUrl + "\")' onerror='this.style.display=\"none\"; this.parentNode.innerHTML=\"<div class=\\\"image-placeholder\\\">No Image Available</div>\";'>";
                 } else {
                     thumbnailContent = "<div class='image-placeholder'>No Image Available</div>";
                 }
                 
-                // Create colored category badge
-                var categoryBadge = "<span class='category-badge category-" + row.CATEGORY + "'>" + row.CATEGORY + "</span>";
+                // Create colored category badge with click handler
+                var categoryBadge = "<span class='category-badge category-" + row[2] + "' onclick='filterByCategory(\"" + row[2] + "\")'>" + row[2] + "</span>";
                 
                 tbody += "<tr>" +
-                    "<td>" + row.CITY + "</td>" +
-                    "<td>" + row.LAYER + "</td>" +
-                    "<td>" + categoryBadge + "</td>" +
-                    "<td>" + row.TYPE + "</td>" +
+                    "<td>" + row[0] + "</td>" +    // CITY
+                    "<td>" + row[1] + "</td>" +    // LAYER
+                    "<td>" + categoryBadge + "</td>" + // CATEGORY
+                    "<td>" + row[3] + "</td>" +    // TYPE
                     "<td class='thumbnail-cell'>" + thumbnailContent + "</td>" +
-                    "<td>" + (row.NOTE || "") + "</td>" +
+                    "<td>" + (row[5] || "") + "</td>" + // NOTE
                     "</tr>";
             }
         });
         document.querySelector("#gisTable tbody").innerHTML = tbody;
-        $("#gisTable").DataTable();
+        window.dataTable = $("#gisTable").DataTable();
+    },
+    error: function(error) {
+        console.error("Error loading CSV file:", error);
+        alert("Error loading data. Please make sure you're running this from a web server or check the browser console for details.");
     }
 });
+
+// Category filtering functions
+var currentCategoryFilter = null;
+
+function filterByCategory(category) {
+    if (window.dataTable) {
+        // Clear any existing search
+        window.dataTable.search('');
+        
+        // Apply category filter to the Category column (index 2)
+        window.dataTable.column(2).search(category).draw();
+        
+        // Update UI
+        currentCategoryFilter = category;
+        document.getElementById('clearFilter').style.display = 'inline-block';
+        document.getElementById('filterStatus').textContent = 'Showing only: ' + category;
+    }
+}
+
+function clearCategoryFilter() {
+    if (window.dataTable) {
+        // Clear all filters
+        window.dataTable.search('').columns().search('').draw();
+        
+        // Update UI
+        currentCategoryFilter = null;
+        document.getElementById('clearFilter').style.display = 'none';
+        document.getElementById('filterStatus').textContent = '';
+    }
+}
+
+// Image modal functions
+function openImageModal(imageSrc) {
+    var modal = document.getElementById("imageModal");
+    var modalImg = document.getElementById("modalImage");
+    modal.style.display = "block";
+    modalImg.src = imageSrc;
+}
+
+// Close modal when clicking the X or outside the image
+document.getElementsByClassName("close-modal")[0].onclick = function() {
+    document.getElementById("imageModal").style.display = "none";
+}
+
+document.getElementById("imageModal").onclick = function(event) {
+    if (event.target === this) {
+        this.style.display = "none";
+    }
+}
+
+// Close modal with Escape key
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        document.getElementById("imageModal").style.display = "none";
+        document.getElementById("requestModal").style.display = "none";
+    }
+});
+
+// Request data modal functions
+function openRequestModal() {
+    document.getElementById("requestModal").style.display = "block";
+}
+
+function closeRequestModal() {
+    document.getElementById("requestModal").style.display = "none";
+    // Clear form
+    document.getElementById("requestForm").reset();
+}
+
+function sendDataRequest() {
+    // Get form data
+    var name = document.getElementById("requesterName").value;
+    var email = document.getElementById("requesterEmail").value;
+    var layers = document.getElementById("requestedLayers").value;
+    var message = document.getElementById("requestMessage").value;
+    
+    // Validate required fields
+    if (!name || !email || !layers || !message) {
+        alert("Please fill in all required fields.");
+        return;
+    }
+    
+    // Create email content
+    var subject = "GIS Data Request from " + name;
+    var body = "Name: " + name + "\n";
+    body += "Email: " + email + "\n";
+    body += "Requested Layer(s): " + layers + "\n\n";
+    body += "Message/Purpose:\n" + message + "\n\n";
+    body += "---\nThis request was sent from the GIS Data Catalog.";
+    
+    // Create mailto link (replace YOUR_EMAIL with your actual email)
+    var mailtoLink = "mailto:lmachaj@stgdesign.com?subject=" + 
+                     encodeURIComponent(subject) + 
+                     "&body=" + encodeURIComponent(body);
+    
+    // Open email client
+    window.location.href = mailtoLink;
+    
+    // Close modal and show confirmation
+    closeRequestModal();
+    alert("Your email client should open with the request. Please send the email to complete your request.");
+}
+
+// Close request modal when clicking outside
+document.getElementById("requestModal").onclick = function(event) {
+    if (event.target === this) {
+        closeRequestModal();
+    }
+}
 </script>
 </body>
 </html>
