@@ -91,3 +91,4 @@ NASHVILLE,SIDEWALK CENTERLINES,TRANSPORTATION,LINE,Sidewalks.png,,https://lmac-s
 NATIONAL,1/3 SECOND DEM ,TERRAIN,RASTER,DEM.png,DIGITAL ELEVATION MODEL; CAN BE USED TO EASILY CREATE TERRAIN MESH OF LARGE AREAS IN RHINO,https://lmac-stg.github.io/gis-data-catalog/images/DEM.png
 NATIONAL,SATELLITE IMAGERY,TERRAIN,RASTER,2DSatellite.png,"FLATE, HI-RES IMAGERY. PAID SERVICES CAN OFFER EVEN HIGHER RESOLUTION",https://lmac-stg.github.io/gis-data-catalog/images/2DSatellite.png
 AUSTIN,ETOD OVERLAY,PLANNING,POLYGON,ETODOverlay.png,EQUITABLE TRANSIT-ORIENTED DEVELOPMENT,https://lmac-stg.github.io/gis-data-catalog/images/ETODOverlay.png
+AUSTIN,RIGHT OF WAY,ZONING,POLYGON,RightOfWay.png,,https://lmac-stg.github.io/gis-data-catalog/images/RightOfWay.png
