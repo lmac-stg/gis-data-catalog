@@ -30,13 +30,13 @@
         .image-placeholder {
             width: 90px;
             height: 60px;
-            background-color: #f8f9fa;
-            border: 1px dashed #dee2e6;
+            background-color: #3a3a3a;
+            border: 1px dashed #666;
             border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #6c757d;
+            color: #aaa;
             font-size: 11px;
             text-align: center;
             margin: 0 auto;
@@ -78,7 +78,7 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.8);
+            background-color: rgba(0,0,0,0.9);
             cursor: pointer;
         }
         .modal-content {
@@ -111,35 +111,42 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.5);
+            background-color: rgba(0,0,0,0.8);
         }
         .request-modal-content {
-            background-color: white;
+            background-color: #2d2d2d;
             margin: 5% auto;
             padding: 30px;
             border-radius: 10px;
             width: 90%;
             max-width: 500px;
             position: relative;
+            border: 1px solid #555;
         }
         .request-modal h3 {
             margin-top: 0;
-            color: #333;
+            color: #ffffff;
         }
         .request-modal label {
             display: block;
             margin-bottom: 5px;
             font-weight: bold;
-            color: #555;
+            color: #cccccc;
         }
         .request-modal input, .request-modal textarea {
             width: 100%;
             padding: 10px;
             margin-bottom: 15px;
-            border: 1px solid #ddd;
+            border: 1px solid #555;
             border-radius: 4px;
             font-family: Arial, sans-serif;
             box-sizing: border-box;
+            background-color: #3a3a3a;
+            color: #e0e0e0;
+        }
+        .request-modal input:focus, .request-modal textarea:focus {
+            border-color: #007bff;
+            outline: none;
         }
         .request-modal textarea {
             height: 120px;
@@ -158,48 +165,118 @@
             font-weight: bold;
         }
         .request-modal .cancel-btn {
-            background-color: #6c757d;
+            background-color: #555;
             color: white;
+        }
+        .request-modal .cancel-btn:hover {
+            background-color: #666;
         }
         .request-modal .send-btn {
             background-color: #007bff;
             color: white;
         }
-        .request-modal button:hover {
-            opacity: 0.9;
+        .request-modal .send-btn:hover {
+            background-color: #0056b3;
         }
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
         }
         h1 {
             font-size: 24px;
             margin-bottom: 20px;
+            color: #ffffff;
+        }
+        p {
+            color: #cccccc;
         }
         #gisTable {
             width: 100%;
+            background-color: #2d2d2d;
         }
         #gisTable td {
             vertical-align: middle;
             padding: 8px;
+            background-color: #2d2d2d;
+            color: #e0e0e0;
+            border-bottom: 1px solid #444;
         }
         #gisTable th {
             padding: 10px 8px;
+            background-color: #333333;
+            color: #ffffff;
+            border-bottom: 2px solid #555;
+        }
+        /* DataTables dark theme overrides */
+        .dataTables_wrapper {
+            color: #e0e0e0;
+        }
+        .dataTables_length select,
+        .dataTables_filter input {
+            background-color: #333;
+            color: #e0e0e0;
+            border: 1px solid #555;
+        }
+        .dataTables_info,
+        .dataTables_paginate {
+            color: #cccccc;
+        }
+        .paginate_button {
+            background-color: #444 !important;
+            color: #e0e0e0 !important;
+        }
+        .paginate_button:hover {
+            background-color: #555 !important;
+        }
+        .paginate_button.current {
+            background-color: #007bff !important;
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .header-text {
+            flex-grow: 1;
+        }
+        .header-text h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .header-text p {
+            margin: 5px 0 0 0;
+        }
+        .header-logo {
+            margin-left: 20px;
+        }
+        .header-logo img {
+            height: 60px;
+            width: auto;
         }
     </style>
 </head>
 <body>
-<h1>GIS Data Catalog – Austin & Nashville</h1>
-<p>Search, sort, and filter through available GIS datasets. Reach out to the Design Tech team when you find a dataset of interest.</p>
+<div class="header-container">
+    <div class="header-text">
+        <h1>GIS Data Catalog – Austin & Nashville</h1>
+        <p>Search, sort, and filter through available GIS datasets. Reach out to the Design Tech team when you find a dataset of interest.</p>
+    </div>
+    <div class="header-logo">
+        <img src="images/Logo2.png" alt="Company Logo">
+    </div>
+</div>
 <div id="filterControls" style="margin-bottom: 15px;">
-    <button id="clearFilter" onclick="clearCategoryFilter()" style="padding: 8px 16px; background-color: #6c757d; color: white; border: none; border-radius: 4px; cursor: pointer; display: none;">Clear Category Filter</button>
+    <button id="clearFilter" onclick="clearCategoryFilter()" style="padding: 8px 16px; background-color: #555; color: white; border: none; border-radius: 4px; cursor: pointer; display: none;">Clear Category Filter</button>
     <button id="requestDataBtn" onclick="openRequestModal()" style="padding: 8px 16px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; margin-left: 10px;">Request Data</button>
-    <span id="filterStatus" style="margin-left: 10px; font-style: italic; color: #666;"></span>
+    <span id="filterStatus" style="margin-left: 10px; font-style: italic; color: #aaa;"></span>
 </div>
 <table id="gisTable" class="display">
     <thead>
         <tr>
-            <th>City</th>
+            <th>Database</th>
             <th>Layer</th>
             <th>Category</th>
             <th>Type</th>

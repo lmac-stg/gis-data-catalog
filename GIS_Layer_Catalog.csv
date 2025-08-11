@@ -1,7 +1,8 @@
+DATASET,LAYER,CATEGORY,TYPE,IMAGE TITLE,NOTE,IMAGE
 AUSTIN,>15% SLOPE,TERRAIN,POLYGON,15Slope.png,VALUE CAN BE ADJUSTED TO FIT SLOPE NEED,https://lmac-stg.github.io/gis-data-catalog/images/15Slope.png
 AUSTIN,APPRAISAL DISTRICTS,PARCELS,POLYGON,AppraisalDistricts.png,"TCAD, WCAD, HCAD, BCAD",https://lmac-stg.github.io/gis-data-catalog/images/AppraisalDistricts.png
-AUSTIN,ASMP STREET NETWORK,INFRASTRUCTURE,LINE,,AUSTIN STRATEGIC MOBILITY PLAN,
-AUSTIN,AUSTIN METRO AREA TRANSPORT PLAN,INFRASTRUCTURE,LINE,,AS OF 2025,
+AUSTIN,ASMP STREET NETWORK,INFRASTRUCTURE,LINE,ASMPNetwork.png,AUSTIN STRATEGIC MOBILITY PLAN,https://lmac-stg.github.io/gis-data-catalog/images/ASMPNetwork.png
+AUSTIN,AUSTIN METRO AREA TRANSPORT PLAN,INFRASTRUCTURE,LINE,MetroTransportPlan.png,AS OF 2025,https://lmac-stg.github.io/gis-data-catalog/images/MetroTransportPlan.png
 AUSTIN,BUILDING FOOTPRINTS 2023,INFRASTRUCTURE,POLYGON,BuildingFootprints.png,UPDATED EVERY 2 YEARS,https://lmac-stg.github.io/gis-data-catalog/images/BuildingFootprints.png
 AUSTIN,CAP METRO BUS ROUTE,TRANSPORTATION,LINE,CapMetroBusRoutes.png,,https://lmac-stg.github.io/gis-data-catalog/images/CapMetroBusRoutes.png
 AUSTIN,CAP METRO BUS STOPS,TRANSPORTATION,POINT,CapMetroBusStops.png,,https://lmac-stg.github.io/gis-data-catalog/images/CapMetroBusStops.png
@@ -9,14 +10,14 @@ AUSTIN,CAP METRO RAIL ROUTE,TRANSPORTATION,LINE,MetroRailRoutes.png,,https://lma
 AUSTIN,CAPITOL DOMINANCE BUFFER,ZONING,POLYGON,CapitolDominanceBuffer.png,,https://lmac-stg.github.io/gis-data-catalog/images/CapitolDominanceBuffer.png
 AUSTIN,CAPITOL VIEW CORRIDORS,ZONING,POLYGON,CapitolViewCorridors.png,AVAILABLE IN 3D OR 2D,https://lmac-stg.github.io/gis-data-catalog/images/CapitolViewCorridors.png
 AUSTIN,CEF SETBACK,ENVIRONMENTAL,POLYGON,CEFSetback.png,CRITICAL ENVIRONMENTAL FEATURES,https://lmac-stg.github.io/gis-data-catalog/images/CEFSetback.png
-AUSTIN,CENSUS TRACT,REGIONAL,POLYGON,,,
-AUSTIN,CENTRAL URBAN RENEWAL (C.U.R.E),ZONING,POLYGON,CentralUrbanRenewal.png,,https://lmac-stg.github.io/gis-data-catalog/images/CentralUrbanRenewal.png
-AUSTIN,CITY OF AUSTIN OWNED PARCELS,PARCELS,POLYGON,,,
-AUSTIN,CITY OF AUSTIN PARKS,ENVIRONMENTAL,POLYGON,,,
-AUSTIN,COA HISTORIC DISTRICT,HISTORIC,POLYGON,,,
-AUSTIN,COA HISTORIC LANDMARK,HISTORIC,POINT,,,
+AUSTIN,CENSUS TRACT,REGIONAL,POLYGON,CensusTracts.png,,https://lmac-stg.github.io/gis-data-catalog/images/CensusTracts.png
+AUSTIN,CENTRAL URBAN RENEWAL (C.U.R.E),PLANNING,POLYGON,CentralUrbanRenewal.png,,https://lmac-stg.github.io/gis-data-catalog/images/CentralUrbanRenewal.png
+AUSTIN,CITY OF AUSTIN OWNED PARCELS,PARCELS,POLYGON,COAOwned.png,,https://lmac-stg.github.io/gis-data-catalog/images/COAOwned.png
+AUSTIN,CITY OF AUSTIN PARKS,ENVIRONMENTAL,POLYGON,COAParks.png,,https://lmac-stg.github.io/gis-data-catalog/images/COAParks.png
+AUSTIN,COA HISTORIC DISTRICT,HISTORIC,POLYGON,COAHistoricDistricts.png,,https://lmac-stg.github.io/gis-data-catalog/images/COAHistoricDistricts.png
+AUSTIN,COA HISTORIC LANDMARK,HISTORIC,POINT,COAHistoricLandmarks.png,,https://lmac-stg.github.io/gis-data-catalog/images/COAHistoricLandmarks.png
 AUSTIN,CONTOURS ,TERRAIN,LINE,Contours.png,,https://lmac-stg.github.io/gis-data-catalog/images/Contours.png
-AUSTIN,CORE TRANSIT CORRIDOR,INFRASTRUCTURE,LINE,,,
+AUSTIN,CORE TRANSIT CORRIDOR,INFRASTRUCTURE,LINE,CoreTransit.png,PRESENT AND FUTURE,https://lmac-stg.github.io/gis-data-catalog/images/CoreTransit.png
 AUSTIN,COUNCIL DISTRICT,ZONING,POLYGON,CouncilDistrict.png,,https://lmac-stg.github.io/gis-data-catalog/images/CouncilDistrict.png
 AUSTIN,COUNTIES,REGIONAL,POLYGON,County.png,,https://lmac-stg.github.io/gis-data-catalog/images/County.png
 AUSTIN,CREEK BUFFERS,ENVIRONMENTAL,POLYGON,CreekBuffers.png,,https://lmac-stg.github.io/gis-data-catalog/images/CreekBuffers.png
@@ -32,7 +33,7 @@ AUSTIN,GREEN BUILDING MANDATORY ZONE,ZONING,POLYGON,GreenBuildingMandatory.png,,
 AUSTIN,IMAGINE AUSTIN CENTERS,REGIONAL,POLYGON,ImagineAustinCenters.png,,https://lmac-stg.github.io/gis-data-catalog/images/ImagineAustinCenters.png
 AUSTIN,IMAGINE AUSTIN CORRIDOR,REGIONAL,POLYGON,ImagineAustinCorridors.png,,https://lmac-stg.github.io/gis-data-catalog/images/ImagineAustinCorridors.png
 AUSTIN,IMPERVIOUS COVER 2023,INFRASTRUCTURE,POLYGON,ImperviousCover.png,MANY SUBLAYERS TO BE ISOLATED,https://lmac-stg.github.io/gis-data-catalog/images/ImperviousCover.png
-AUSTIN,INFILL STRATEGY ZONES,ZONING,POLYGON,,CITY OF AUSTIN DESIGNATED LAND USE STRATEGIES,
+AUSTIN,INFILL STRATEGY ZONES,ZONING,POLYGON,InfillStrategyZones.png,CITY OF AUSTIN DESIGNATED LAND USE STRATEGIES,https://lmac-stg.github.io/gis-data-catalog/images/InfillStrategyZones.png
 AUSTIN,LAKES,ENVIRONMENTAL,POLYGON,,,
 AUSTIN,LAND USE INVENTORY,ZONING,POLYGON,LandUseInventory.png,,https://lmac-stg.github.io/gis-data-catalog/images/LandUseInventory.png
 AUSTIN,LOT LINE,PARCELS,POLYGON,LotLines.png,,https://lmac-stg.github.io/gis-data-catalog/images/LotLines.png
@@ -41,15 +42,15 @@ AUSTIN,NATIONAL REGISTER HISTORIC LANDMARK,HISTORIC,POINT,,,
 AUSTIN,NEIGHBORHOOD AREA,ZONING,POLYGON,NeighborhoodArea.png,,https://lmac-stg.github.io/gis-data-catalog/images/NeighborhoodArea.png
 AUSTIN,PARKLAND DEFICIENT AREA,ZONING,POLYGON,ParklandDeficientArea.png,,https://lmac-stg.github.io/gis-data-catalog/images/ParklandDeficientArea.png
 AUSTIN,POLICE STATIONS,FACILITIES,POINT,,,
-AUSTIN,POOLS,FACILITIES,POLYGON,,LOCATION OF CITY RUN POOLS AND SPLASHPADS,
-AUSTIN,PROTECTED STREETS,INFRASTRUCTURE,LINE,,,
+AUSTIN,POOLS,FACILITIES,POINT,,LOCATION OF CITY RUN POOLS AND SPLASHPADS,
+AUSTIN,PROTECTED STREETS,INFRASTRUCTURE,LINE,ProtectedStreets.png,,https://lmac-stg.github.io/gis-data-catalog/images/ProtectedStreets.png
 AUSTIN,RAILROADS,TRANSPORTATION,LINE,Railroads.png,,https://lmac-stg.github.io/gis-data-catalog/images/Railroads.png
 AUSTIN,RECORDED SUBDIVISION,PARCELS,POLYGON,RecordedSubdivision.png,,https://lmac-stg.github.io/gis-data-catalog/images/RecordedSubdivision.png
 AUSTIN,RECREATION CENTERS,FACILITIES,POINT,,,
 AUSTIN,RIMROCK/BLUFF,ENVIRONMENTAL,LINE,,,
-AUSTIN,SMALL AREA RECOMMENDATIONS,ZONING,POLYGON,SmallAreaRecommendations.png,CITY RECOMMENDATIONS FOR DEVELOPMENT,https://lmac-stg.github.io/gis-data-catalog/images/SmallAreaRecommendations.png
+AUSTIN,SMALL AREA RECOMMENDATIONS,PLANNING,POLYGON,SmallAreaRecommendations.png,CITY RECOMMENDATIONS FOR DEVELOPMENT,https://lmac-stg.github.io/gis-data-catalog/images/SmallAreaRecommendations.png
 AUSTIN,SOUND ORDINANCE ZONES,ZONING,POLYGON,,,
-AUSTIN,SPRING,ENVIRONMENTAL,POINT,,,
+AUSTIN,SPRING,ENVIRONMENTAL,POINT,,NATURAL WATER SPRING LOCATION,
 AUSTIN,STREET CENTERLINES,TRANSPORTATION,LINE,StreetCenterlines.png,,https://lmac-stg.github.io/gis-data-catalog/images/StreetCenterlines.png
 AUSTIN,TEXAS STATE PARKS,ENVIRONMENTAL,POLYGON,,,
 AUSTIN,TRANSIT PRIORITY NETWORK,INFRASTRUCTURE,LINE,,,
@@ -65,4 +66,28 @@ AUSTIN,WETLAND,ENVIRONMENTAL,POLYGON,Wetland.png,,https://lmac-stg.github.io/gis
 AUSTIN,WILDLAND URBAN INTERFERENCE,ENVIRONMENTAL,POLYGON,WildlandUrbanInterference.png,,https://lmac-stg.github.io/gis-data-catalog/images/WildlandUrbanInterference.png
 AUSTIN,ZIPCODE,REGIONAL,POLYGON,Zipcode.png,,https://lmac-stg.github.io/gis-data-catalog/images/Zipcode.png
 AUSTIN,ZONING,ZONING,POLYGON,Zoning.png,,https://lmac-stg.github.io/gis-data-catalog/images/Zoning.png
-CITY,LAYER,CATEGORY,TYPE,IMAGE TITLE,NOTE,IMAGE
+TEXAS,OIL AND GAS WELLS,INFRASTRUCTURE,POINT,OilandGasWells.png,,https://lmac-stg.github.io/gis-data-catalog/images/OilandGasWells.png
+TEXAS,PSF UPLANDS,ZONING,POLYGON,PSFUplands.png,,https://lmac-stg.github.io/gis-data-catalog/images/PSFUplands.png
+TEXAS,AQUIFERS,ENVIRONMENTAL,POLYGON,Aquifers.png,,https://lmac-stg.github.io/gis-data-catalog/images/Aquifers.png
+TRAVIS,STORM WATER MANAGEMENT,INFRASTRUCTURE,POINT,StormWaterManagement.png,,https://lmac-stg.github.io/gis-data-catalog/images/StormWaterManagement.png
+TRAVIS,BALCONES CANYONLANDS PRESERVE,REGIONAL,POLYGON,BalconesPreserve.png,,https://lmac-stg.github.io/gis-data-catalog/images/BalconesPreserve.png
+TRAVIS,ENDANGERED SPECIED HABITAT,ENVIRONMENTAL,POLYGON,EndangeredHabitat.png,,https://lmac-stg.github.io/gis-data-catalog/images/EndangeredHabitat.png
+TRAVIS,COLORADO RIVER CORRIDOR CONCEPT,PLANNING,POLYGON,ColoradoRiverCorridor.png,CRCP,https://lmac-stg.github.io/gis-data-catalog/images/ColoradoRiverCorridor.png
+TRAVIS,FLOOD HAZARD LAYERS,ENVIRONMENTAL,POLYGON,FloodHazard.png,,https://lmac-stg.github.io/gis-data-catalog/images/FloodHazard.png
+TRAVIS,MUNICIPAL JURISDICTIONS,REGIONAL,POLYGON,MunicipalJurisdictions.png,,https://lmac-stg.github.io/gis-data-catalog/images/MunicipalJurisdictions.png
+AUSTIN,BICYCLE ROUTES,TRANSPORTATION,LINE,BikeRoutes.png,,https://lmac-stg.github.io/gis-data-catalog/images/BikeRoutes.png
+AUSTIN,METROBIKE STATIONS,TRANSPORTATION,POINT,MetroBikeStations.png,,https://lmac-stg.github.io/gis-data-catalog/images/MetroBikeStations.png
+NASHVILLE,MDHA PROMISE ZONE,PLANNING,POLYGON,MDHAPromise.png,,https://lmac-stg.github.io/gis-data-catalog/images/MDHAPromise.png
+NASHVILLE,CITY OPPORTUNITY ZONE,PLANNING,POLYGON,Opportunity.png,,https://lmac-stg.github.io/gis-data-catalog/images/Opportunity.png
+NASHVILLE,COMMUNITY CHARACTER POLICIES,PLANNING,POLYGON,CommunityCharacter.png,,https://lmac-stg.github.io/gis-data-catalog/images/CommunityCharacter.png
+NASHVILLE,PARKS AND GREENWAYS,FACILITIES,POLYGON,ParksandGreenways.png,,https://lmac-stg.github.io/gis-data-catalog/images/ParksandGreenways.png
+NASHVILLE,WATERBODIES,ENVIRONMENTAL,POLYGON,Waterbodies.png,,https://lmac-stg.github.io/gis-data-catalog/images/Waterbodies.png
+NASHVILLE,BIKEWAYS,TRANSPORTATION,LINE,Bikeways.png,,https://lmac-stg.github.io/gis-data-catalog/images/Bikeways.png
+NASHVILLE,>15% SLOPE ,TERRAIN,POLYGON,GreaterThan15.png,,https://lmac-stg.github.io/gis-data-catalog/images/GreaterThan15.png
+NASHVILLE,HISTORIC DESIGNATED PROPERTIES,HISTORIC,POLYGON,HistoricDesignated.png,,https://lmac-stg.github.io/gis-data-catalog/images/HistoricDesignated.png
+NATIONAL,LiDAR,TERRAIN,POINT CLOUD,LiDAR.png,"3D LAS FILE, CAN BE CONVERTED TO MESH",https://lmac-stg.github.io/gis-data-catalog/images/LiDAR.png
+NASHVILLE,ROAD CENTERLINES,TRANSPORTATION,LINE,RoadCenterlines.png,,https://lmac-stg.github.io/gis-data-catalog/images/RoadCenterlines.png
+NASHVILLE,SIDEWALK CENTERLINES,TRANSPORTATION,LINE,Sidewalks.png,,https://lmac-stg.github.io/gis-data-catalog/images/Sidewalks.png
+NATIONAL,1/3 SECOND DEM ,TERRAIN,RASTER,DEM.png,DIGITAL ELEVATION MODEL; CAN BE USED TO EASILY CREATE TERRAIN MESH OF LARGE AREAS IN RHINO,https://lmac-stg.github.io/gis-data-catalog/images/DEM.png
+NATIONAL,SATELLITE IMAGERY,TERRAIN,RASTER,2DSatellite.png,"FLATE, HI-RES IMAGERY. PAID SERVICES CAN OFFER EVEN HIGHER RESOLUTION",https://lmac-stg.github.io/gis-data-catalog/images/2DSatellite.png
+AUSTIN,ETOD OVERLAY,PLANNING,POLYGON,ETODOverlay.png,EQUITABLE TRANSIT-ORIENTED DEVELOPMENT,https://lmac-stg.github.io/gis-data-catalog/images/ETODOverlay.png
