@@ -233,6 +233,67 @@
         .paginate_button.current {
             background-color: #007bff !important;
         }
+        /* Database filter styles */
+        .database-filter {
+            display: inline-block;
+            margin-left: 20px;
+            padding: 8px 12px;
+            background-color: #2d2d2d;
+            border-radius: 6px;
+            border: 1px solid #444;
+            vertical-align: top;
+        }
+        .database-filter h4 {
+            display: inline-block;
+            margin: 0 8px 0 0;
+            color: #ffffff;
+            font-size: 12px;
+            vertical-align: middle;
+        }
+        .database-checkboxes {
+            display: inline-block;
+            gap: 10px;
+        }
+        .database-checkbox {
+            display: inline-block;
+            margin-right: 12px;
+            color: #e0e0e0;
+            vertical-align: middle;
+        }
+        .database-checkbox input[type="checkbox"] {
+            margin-right: 4px;
+            accent-color: #007bff;
+            vertical-align: middle;
+        }
+        .database-checkbox label {
+            cursor: pointer;
+            font-size: 12px;
+            vertical-align: middle;
+        }
+        .filter-actions {
+            display: inline-block;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+        .filter-actions button {
+            padding: 4px 8px;
+            margin-right: 4px;
+            background-color: #555;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 11px;
+        }
+        .filter-actions button:hover {
+            background-color: #666;
+        }
+        .filter-actions .apply-btn {
+            background-color: #007bff;
+        }
+        .filter-actions .apply-btn:hover {
+            background-color: #0056b3;
+        }
         .header-container {
             display: flex;
             justify-content: space-between;
@@ -268,9 +329,23 @@
         <img src="images/Logo2.png" alt="Company Logo">
     </div>
 </div>
+
 <div id="filterControls" style="margin-bottom: 15px;">
     <button id="clearFilter" onclick="clearCategoryFilter()" style="padding: 8px 16px; background-color: #555; color: white; border: none; border-radius: 4px; cursor: pointer; display: none;">Clear Category Filter</button>
-    <button id="requestDataBtn" onclick="openRequestModal()" style="padding: 8px 16px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; margin-left: 10px;">Request Data</button>
+    <button id="requestDataBtn" onclick="openRequestModal()" style="padding: 11px 16px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; margin-left: 10px; vertical-align: top;">Request Data</button>
+    
+    <!-- Inline Database Filter -->
+    <div class="database-filter">
+        <h4>Filter:</h4>
+        <div class="database-checkboxes" id="databaseCheckboxes">
+            <!-- Database checkboxes will be populated by JavaScript -->
+        </div>
+        <div class="filter-actions">
+            <button class="apply-btn" onclick="applyDatabaseFilter()">Apply</button>
+            <button onclick="clearDatabaseFilter()">Clear</button>
+        </div>
+    </div>
+    
     <span id="filterStatus" style="margin-left: 10px; font-style: italic; color: #aaa;"></span>
 </div>
 <table id="gisTable" class="display">
@@ -337,7 +412,8 @@ Papa.parse("GIS_Layer_Catalog.csv", {
         var tbody = "";
         data.forEach(function(row) {
             // row is now an array: [CITY, LAYER, CATEGORY, TYPE, IMAGE, NOTE, IMAGE_URL]
-            if(row[0] && row[0].trim() !== "") { // Check if city exists
+            // Exclude 'DATASET' database entries
+            if(row[0] && row[0].trim() !== "" && row[0].trim().toUpperCase() !== "DATASET") { // Check if city exists and is not DATASET
                 var thumbnailContent = "";
                 // Use IMAGE_URL (index 6) if available, otherwise IMAGE (index 4)
                 var imageUrl = (row[6] && row[6].trim() !== "") ? row[6] : 
@@ -364,6 +440,9 @@ Papa.parse("GIS_Layer_Catalog.csv", {
         });
         document.querySelector("#gisTable tbody").innerHTML = tbody;
         window.dataTable = $("#gisTable").DataTable();
+        
+        // Populate database filter checkboxes
+        populateDatabaseFilter(data);
     },
     error: function(error) {
         console.error("Error loading CSV file:", error);
@@ -397,6 +476,85 @@ function clearCategoryFilter() {
         // Update UI
         currentCategoryFilter = null;
         document.getElementById('clearFilter').style.display = 'none';
+        document.getElementById('filterStatus').textContent = '';
+    }
+}
+
+// Database filtering functions
+var availableDatabases = [];
+var currentDatabaseFilter = [];
+
+function populateDatabaseFilter(data) {
+    // Get unique databases, excluding 'DATASET'
+    var databases = new Set();
+    data.forEach(function(row) {
+        if(row[0] && row[0].trim() !== "" && row[0].trim().toUpperCase() !== "DATASET") {
+            databases.add(row[0].trim());
+        }
+    });
+    
+    availableDatabases = Array.from(databases).sort();
+    
+    // Create checkboxes
+    var checkboxContainer = document.getElementById('databaseCheckboxes');
+    var checkboxHTML = '';
+    
+    availableDatabases.forEach(function(database) {
+        checkboxHTML += '<div class="database-checkbox">' +
+            '<input type="checkbox" id="db_' + database.replace(/\s/g, '_') + '" value="' + database + '" onchange="updateDatabaseFilterStatus()">' +
+            '<label for="db_' + database.replace(/\s/g, '_') + '">' + database + '</label>' +
+            '</div>';
+    });
+    
+    checkboxContainer.innerHTML = checkboxHTML;
+}
+
+function updateDatabaseFilterStatus() {
+    // This function can be used for real-time updates if needed
+    // For now, we'll apply filters only when "Apply Filter" is clicked
+}
+
+function applyDatabaseFilter() {
+    // Get selected databases
+    var selectedDatabases = [];
+    var checkboxes = document.querySelectorAll('#databaseCheckboxes input[type="checkbox"]:checked');
+    
+    checkboxes.forEach(function(checkbox) {
+        selectedDatabases.push(checkbox.value);
+    });
+    
+    currentDatabaseFilter = selectedDatabases;
+    
+    if (window.dataTable && selectedDatabases.length > 0) {
+        // Create regex pattern for multiple databases
+        var pattern = selectedDatabases.map(function(db) {
+            return '^' + db.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '$';
+        }).join('|');
+        
+        // Apply database filter to the Database column (index 0)
+        window.dataTable.column(0).search(pattern, true, false).draw();
+        
+        // Update status
+        document.getElementById('filterStatus').textContent = 
+            'Filtering by: ' + selectedDatabases.join(', ');
+    } else if (window.dataTable) {
+        // Clear database filter but keep other filters
+        window.dataTable.column(0).search('').draw();
+        document.getElementById('filterStatus').textContent = '';
+    }
+}
+
+function clearDatabaseFilter() {
+    // Uncheck all database checkboxes
+    var checkboxes = document.querySelectorAll('#databaseCheckboxes input[type="checkbox"]');
+    checkboxes.forEach(function(checkbox) {
+        checkbox.checked = false;
+    });
+    
+    // Clear the filter
+    currentDatabaseFilter = [];
+    if (window.dataTable) {
+        window.dataTable.column(0).search('').draw();
         document.getElementById('filterStatus').textContent = '';
     }
 }
