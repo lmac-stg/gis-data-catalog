@@ -384,6 +384,12 @@
             <label for="requestedLayers">Requested Layer(s):</label>
             <input type="text" id="requestedLayers" name="requestedLayers" placeholder="e.g., Zoning, Building Footprints, etc." required>
             
+            <label for="projectAddress">Project Address:</label>
+            <input type="text" id="projectAddress" name="projectAddress" placeholder="Enter the project address or location" required>
+            
+            <label for="dataRange">Range of Data From Site (Miles, Blocks):</label>
+            <input type="text" id="dataRange" name="dataRange" placeholder="e.g., 2 blocks, 0.5 miles, 1000 feet" required>
+            
             <label for="requestMessage">Message/Purpose:</label>
             <textarea id="requestMessage" name="requestMessage" placeholder="Please describe what you need this data for and any specific requirements..." required></textarea>
             
@@ -602,10 +608,12 @@ function sendDataRequest() {
     var name = document.getElementById("requesterName").value;
     var email = document.getElementById("requesterEmail").value;
     var layers = document.getElementById("requestedLayers").value;
+    var projectAddress = document.getElementById("projectAddress").value;
+    var dataRange = document.getElementById("dataRange").value;
     var message = document.getElementById("requestMessage").value;
     
     // Validate required fields
-    if (!name || !email || !layers || !message) {
+    if (!name || !email || !layers || !projectAddress || !dataRange || !message) {
         alert("Please fill in all required fields.");
         return;
     }
@@ -614,7 +622,9 @@ function sendDataRequest() {
     var subject = "GIS Data Request from " + name;
     var body = "Name: " + name + "\n";
     body += "Email: " + email + "\n";
-    body += "Requested Layer(s): " + layers + "\n\n";
+    body += "Requested Layer(s): " + layers + "\n";
+    body += "Project Address: " + projectAddress + "\n";
+    body += "Range of data from site: " + dataRange + "\n\n";
     body += "Message/Purpose:\n" + message + "\n\n";
     body += "---\nThis request was sent from the GIS Data Catalog.";
     
